@@ -1,0 +1,133 @@
+Get all the countries from the Asia continent /region using the Filter function
+**********************************************************************************
+var request=new XMLHttpRequest();
+request.open("GET", "https://restcountries.com/v3.1/all")
+request.send();
+request.onload=function(){ 
+var data=JSON.parse(this.response);
+  var subregion=null;
+printdata(data);
+}
+function
+ printdata(data) {
+   if(data.length>0){
+      subregionList =data.filter(obj => obj.region == "Asia");
+   if(subregionList.length>0){
+         const result = new Set();
+     for(let i=0;i<subregionList.length;i++) {
+     const subregion =subregionList[i].subregion;  
+		result.add(subregion);
+   }
+      for (const item of result) {
+  console.log(item);
+   } 
+   } 
+   }
+   }
+
+
+
+Get all the countries with a population of less than 2 lakhs using Filter function
+**************************************************************************
+var request=new XMLHttpRequest();
+request.open("GET", "https://restcountries.com/v3.1/all")
+request.send();
+request.onload=function(){ 
+var data=JSON.parse(this.response);
+  var population=null;
+printdata(data);
+}
+function
+ printdata(data) {
+   if(data.length>0){
+      populationlist =data.filter(obj => obj.population <200000);
+      if(populationlist.length>0){
+         const result = new Set();
+     for(let i=0;i<populationlist.length;i++) {
+     const subregion =populationlist[i].subregion;
+		result.add(subregion);
+   }
+    for (const item of result) {
+  console.log(item);
+   }
+      }
+   }
+   }
+
+Print the following details name, capital, flag using forEach function
+***********************************************************************
+var request=new XMLHttpRequest();
+request.open("GET", "https://restcountries.com/v3.1/all")
+request.send();
+request.onload=function(){ 
+var data=JSON.parse(this.response);
+printdata(data);
+}
+function
+ printdata(data) {
+   if(data.length>0){
+data.forEach(element => {
+  console.log(element.name.common,element.capital[0],element.flags.png);
+});
+   }
+   }
+
+
+Print the total population of countries using reduce function
+**************************************************************
+
+var request=new XMLHttpRequest();
+request.open("GET", "https://restcountries.com/v3.1/all")
+request.send();
+request.onload=function(){ 
+var data=JSON.parse(this.response);
+printdata(data);
+}
+function
+ printdata(data) {
+   if(data.length>0){
+     const array1 =[];
+     for(let i=0;i<data.length;i++) {
+     const {population=0}=data[i];
+       array1.push(population);
+      
+};
+     
+    const initialValue = 0;
+    const sumWithInitial = array1.reduce(
+  (accumulator, currentValue) => accumulator + currentValue,
+  initialValue
+);
+
+console.log(sumWithInitial);
+    }
+   }
+   
+
+Print the country which uses US Dollars as currency.
+*****************************************************
+
+var request=new XMLHttpRequest();
+request.open("GET", "https://restcountries.com/v3.1/all")
+request.send();
+request.onload=function(){ 
+var data=JSON.parse(this.response);
+printdata(data);
+}
+function
+ printdata(data) {
+   if(data.length>0){
+     const result = new Set();
+     for(let i=0;i<data.length;i++) {
+      const {currencies={}, region='', subregion=''}=data[i];
+         if(currencies.hasOwnProperty("USD")){
+           result.add(subregion)  
+         }  
+   }   
+       for (const item of result) {
+  console.log(item);
+       }
+   }  
+   }
+
+
